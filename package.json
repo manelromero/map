@@ -13,6 +13,7 @@
   "author": "Manel Romero",
   "license": "ISC",
   "devDependencies": {
+    "browser-sync": "^2.11.1",
     "gulp-cssnano": "^2.1.0",
     "gulp-htmlmin": "^1.3.0",
     "gulp-uglify": "^1.5.1"

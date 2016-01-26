@@ -1,5 +1,14 @@
-var gulp = require('gulp');
+var gulp = require('gulp'),
+		browserSync = require('browser-sync').create(),
+		htmlmin = require('gulp-htmlmin'),
+		uglify = require('gulp-uglify'),
+		cssnano = require('gulp-cssnano');
 
-gulp.task('default', function() {
-  // place code for your default task here
+gulp.task('serve', function() {
+	browserSync.init({
+		server: {
+			baseDir: "app"
+		}
+	});
+	gulp.watch("app/**/*.*").on('change', browserSync.reload);
 });
