@@ -14,7 +14,7 @@
 		<div id="bar">This is the bar</div>
 		<div id="list">
 			<ul data-bind="foreach: allMarkers">
-				<li data-bind="text: name, click: $parent.openInfoWindow"></li>
+				<li data-bind="text: name, event: {mouseover: $parent.showInfo, mouseout: $parent.hideInfo}"></li>
 			</ul>
 		</div>
 		<div id="map"></div>

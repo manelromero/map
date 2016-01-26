@@ -14,36 +14,15 @@ var map = new google.maps.Map(document.getElementById('map'), {
 	center: myLatLng,
 	zoom: 13
 });
-
-var Marker = function(data) {
-
+// Model
+var Location = function(data, marker, infoWindow) {
 	this.name = ko.observable(data.name);
 	this.address = ko.observable(data.address);
 	this.position = ko.observable(data.position);
-
-	this.addMarker = ko.computed(function() {
-
-		var infoText = '<div class="map-name">' +	this.name() +
-				'</div><div class="map-address">' +	this.address() + '</div>';
-		var	infoWindow = new google.maps.InfoWindow({
-			content: infoText
-		});
-
-		var marker = new google.maps.Marker({
-			position: this.position(),
-			map: map,
-			animation: google.maps.Animation.DROP,
-			title: this.name()
-		});
-
-		marker.addListener('click', function() {
-			infoWindow.open(map, marker);
-		});
-
-	}, this);
-
+	this.marker = ko.observable(marker);
+	this.infoWindow = ko.observable(infoWindow)
 };
-
+// ViewModel
 var ViewModel = function() {
 
 	var self = this;
@@ -51,8 +30,33 @@ var ViewModel = function() {
 	this.allMarkers = ko.observableArray([]);
 
 	mapMarkers.forEach(function(data) {
-		self.allMarkers.push(new Marker(data));
+		var marker = new google.maps.Marker({
+			position: data.position,
+			map: map,
+			animation: google.maps.Animation.DROP,
+			title: data.name
+		});
+		var infoText = '<div class="map-name">' +	data.name +
+				'</div><div class="map-address">' +	data.address + '</div>';
+		var infoWindow = new google.maps.InfoWindow({
+					content: infoText
+				});
+
+		marker.addListener('click', function() {
+			infoWindow.open(map, marker);
+		});
+
+		self.allMarkers.push(new Location(data, marker, infoWindow));
+
 	});
+
+	this.showInfo = function(loc) {
+		loc.infoWindow().open(map, loc.marker());
+	}
+
+	this.hideInfo = function(loc) {
+		loc.infoWindow().close();
+	}
 
 };
 
