@@ -13,8 +13,12 @@
 		<div id="name">Manel locations</div>
 		<div id="bar">This is the bar</div>
 		<div id="list">
+			<div id="filter">
+				<input id="filter-text" type="text">
+				<img id="filter-button" src="img/filter.png" alt="filter">
+			</div>
 			<ul data-bind="foreach: allMarkers">
-				<li data-bind="text: name, event: {mouseover: $parent.showInfo, mouseout: $parent.hideInfo}"></li>
+				<li data-bind="text: name, event: {click: $parent.toggleInfo, mouseover: $parent.toggleBounce, mouseout: $parent.toggleBounce}"></li>
 			</ul>
 		</div>
 		<div id="map"></div>

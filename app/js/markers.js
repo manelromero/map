@@ -19,8 +19,8 @@ var mapMarkers = [
 		name: 'Barcelona Cathedral',
 		address: 'Pla de La Seu s/n',
 		position: {
-			lat: 41.3838397,
-			lng: 2.1761053
+			lat: 41.384,
+			lng: 2.1762
 		}
 	},
 	{
@@ -35,8 +35,32 @@ var mapMarkers = [
 		name: 'Park Güell',
 		address: 'Carrer d\'Olot s/n',
 		position: {
-			lat: 41.4144988,
-			lng: 2.1505058
+			lat: 41.414,
+			lng: 2.152
+		}
+	},
+	{
+		name: 'La Sagrada Familia',
+		address: 'Marina 253',
+		position: {
+			lat: 41.403563,
+			lng: 2.174440
+		}
+	},
+	{
+		name: 'Olympic Port',
+		address: 'Marina 42',
+		position: {
+			lat: 41.386425,
+			lng: 2.197989
+		}
+	},
+	{
+		name: 'Catalonia Square',
+		address: 'Catalonia Square',
+		position: {
+			lat: 41.386967,
+			lng: 2.170041
 		}
 	}
 ];

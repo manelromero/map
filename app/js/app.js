@@ -1,6 +1,6 @@
 // Set map size
 function elemHeight() {
-	document.getElementById('map').style.height = window.innerHeight - 70 + 'px'; // 70 is the size of #name div
+	document.getElementById('map').style.height = window.innerHeight - 60 + 'px'; // 70 is the size of #name div
 }
 elemHeight();
 // Set map size if browser is resized
@@ -20,28 +20,26 @@ var Location = function(data, marker, infoWindow) {
 	this.address = ko.observable(data.address);
 	this.position = ko.observable(data.position);
 	this.marker = ko.observable(marker);
-	this.infoWindow = ko.observable(infoWindow)
+	this.infoWindow = ko.observable(infoWindow);
 };
 // ViewModel
 var ViewModel = function() {
 
 	var self = this;
-
 	this.allMarkers = ko.observableArray([]);
 
 	mapMarkers.forEach(function(data) {
+		// Create markers and its info windows
 		var marker = new google.maps.Marker({
-			position: data.position,
-			map: map,
-			animation: google.maps.Animation.DROP,
-			title: data.name
-		});
-		var infoText = '<div class="map-name">' +	data.name +
-				'</div><div class="map-address">' +	data.address + '</div>';
-		var infoWindow = new google.maps.InfoWindow({
-					content: infoText
-				});
-
+					position: data.position,
+					map: map,
+					title: data.name
+				}),
+				infoText = '<div class="map-name">' +	data.name +
+				'</div><div class="map-address">' +	data.address + '</div>',
+				infoWindow = new google.maps.InfoWindow({content: infoText});
+		marker.setAnimation(null);
+		// Add event listener for info windows to map icons
 		marker.addListener('click', function() {
 			infoWindow.open(map, marker);
 		});
@@ -49,14 +47,23 @@ var ViewModel = function() {
 		self.allMarkers.push(new Location(data, marker, infoWindow));
 
 	});
-
-	this.showInfo = function(loc) {
-		loc.infoWindow().open(map, loc.marker());
-	}
-
-	this.hideInfo = function(loc) {
-		loc.infoWindow().close();
-	}
+	// Toggle info window for markers
+	this.toggleInfo = function(loc) {
+		var check = loc.infoWindow().anchor;
+		if (typeof check == 'undefined' || check === null) {
+			loc.infoWindow().open(map, loc.marker());
+		} else {
+			loc.infoWindow().close();
+		}
+	};
+	// Toggle map marker bounce
+	this.toggleBounce = function(loc) {
+		if (loc.marker().getAnimation() !== null) {
+			loc.marker().setAnimation(null);
+		} else {
+		loc.marker().setAnimation(google.maps.Animation.BOUNCE);
+		}
+	};
 
 };
 
