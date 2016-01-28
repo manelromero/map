@@ -74,13 +74,18 @@ li:hover {
 	cursor: pointer;
 }
 
-.map-name {
-	font: normal .9rem sans-serif;
+.map-name, .map-link {
+	font: normal 1rem/1.5rem sans-serif;
 }
 
 .map-address {
 	font: normal .7rem sans-serif;
 	color: #999;
+}
+
+.map-link {
+	color: #da6161;
+	text-decoration: none;
 }
 
 @media screen and (min-width: 950px) {
