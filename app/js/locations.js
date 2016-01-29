@@ -1,6 +1,6 @@
 var mapLocations = [
 	{
-		name: 'FC Barcelona Stadium',
+		name: 'Camp Nou',
 		address: 'Arístides Maillol 12',
 		show: true,
 		position: {
@@ -9,7 +9,7 @@ var mapLocations = [
 		}
 	},
 	{
-		name: 'La Pedrera',
+		name: 'Casa Milà',
 		address: 'Provença 261-265',
 		show: true,
 		position: {
@@ -27,7 +27,7 @@ var mapLocations = [
 		}
 	},
 	{
-		name: 'Olympic Stadium',
+		name: 'Montjuic Olympic Stadium',
 		address: 'Carrer de l\'Estadi 50',
 		show: true,
 		position: {
@@ -63,12 +63,48 @@ var mapLocations = [
 		}
 	},
 	{
-		name: 'Catalonia Square',
-		address: 'Catalonia Square',
+		name: 'Plaça Catalunya',
+		address: 'Plaça Catalunya 1',
 		show: true,
 		position: {
 			lat: 41.386967,
 			lng: 2.170041
+		}
+	},
+	{
+		name: 'Ciutadella Park',
+		address: 'Passeig de Picasso 21',
+		show: true,
+		position: {
+			lat: 41.387891,
+			lng: 2.187442
+		}
+	},
+	{
+		name: 'Picasso Museum',
+		address: 'Montcada 15-23',
+		show: true,
+		position: {
+			lat: 41.385217,
+			lng: 2.180885
+		}
+	},
+	{
+		name: 'Font Màgica de Montjuïc',
+		address: 'Plaça de Carles Buïgas 1',
+		show: true,
+		position: {
+			lat: 41.371144,
+			lng: 2.151837
+		}
+	},
+	{
+		name: 'Tramvia Blau',
+		address: 'Av. del Tibidabo 2',
+		show: true,
+		position: {
+			lat: 41.410514,
+			lng: 2.136937
 		}
 	}
 ];

@@ -38,8 +38,7 @@ var ViewModel = function() {
 				}),
 				infoText = '<div class="map-name">' +	data.name +
 				'</div><div class="map-address">' +	data.address + '</div>' +
-				'<div><a class="map-link" href="#">Wikipedia</a></div>' +
-				'<div><a class="map-link" href="#">FourSquare</a></div>',
+				'<div><a class="info-link" name="' + marker.title + '">+info</a></div>',
 				infoWindow = new google.maps.InfoWindow({content: infoText});
 		marker.setAnimation(null);
 		// Add event listener for info windows in map markers
@@ -48,6 +47,7 @@ var ViewModel = function() {
 			var check = infoWindow.anchor;
 			if (typeof check == 'undefined' || check === null) {
 				infoWindow.open(self.map, marker);
+				modalWindow(marker.title);
 			} else {
 				infoWindow.close();
 			}
@@ -90,5 +90,3 @@ var ViewModel = function() {
 };
 
 ko.applyBindings(new ViewModel());
-
-
