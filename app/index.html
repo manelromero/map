@@ -21,13 +21,15 @@
 	</div>
 
 	<div id="container">
-		<div id="name">Barcelona locations</div>
-		<div id="bar"></div>
-		<div id="list">
+		<div id="name"><h3>Barcelona locations</h3></div>
+		<div id="bar">
 			<div id="filter">
 				<span>Filter</span>
 				<input id="filter-field" type="text" data-bind="textInput: filterText">
 			</div>
+
+		</div>
+		<div id="list">
 			<ul data-bind="foreach: allLocations">
 				<li data-bind="visible: show, text: name, event: {click: $parent.toggleInfo, mouseover: $parent.toggleBounce, mouseout: $parent.toggleBounce}"></li>
 			</ul>

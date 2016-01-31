@@ -29,36 +29,40 @@ var ViewModel = function() {
 		zoom: 13
 	});
 	// Create locations and place them in the map
-	mapLocations.forEach(function(data) {
-		// Create markers and its info windows
-		var marker = new google.maps.Marker({
-					position: data.position,
-					map: self.map,
-					title: data.name
-				}),
-				infoText = '<div class="map-name">' +	data.name +
-				'</div><div class="map-address">' +	data.address + '</div>' +
-				'<div><a class="info-link" name="' + marker.title + '">+info</a></div>',
-				infoWindow = new google.maps.InfoWindow({content: infoText});
-		marker.setAnimation(null);
-		// Add event listener for info windows in map markers
-		marker.addListener('click', function() {
-			// Toggle info window
-			var check = infoWindow.anchor;
-			if (typeof check == 'undefined' || check === null) {
-				infoWindow.open(self.map, marker);
-				modalWindow(marker.title);
-			} else {
-				infoWindow.close();
-			}
+	this.drawMap = function() {
+		if (!map) {
+			document.getElementById('map').innerHTML = 'Sorry, map could not be loaded';
+		}
+		mapLocations.forEach(function(data) {
+			// Create markers and its info windows
+			var marker = new google.maps.Marker({
+						position: data.position,
+						map: self.map,
+						title: data.name
+					}),
+					infoText = '<div class="map-name">' +	data.name +
+					'</div><div class="map-address">' +	data.address + '</div>' +
+					'<div><a class="info-link" name="' + marker.title + '">+info</a></div>',
+					infoWindow = new google.maps.InfoWindow({content: infoText});
+			marker.setAnimation(null);
+			// Add event listener for info windows in map markers
+			marker.addListener('click', function() {
+				// Toggle info window
+				var check = infoWindow.anchor;
+				if (typeof check == 'undefined' || check === null) {
+					infoWindow.open(self.map, marker);
+					modalWindow(marker.title);
+				} else {
+					infoWindow.close();
+				}
+			});
+			self.allLocations.push(new Location(data, marker, infoWindow));
 		});
-		self.allLocations.push(new Location(data, marker, infoWindow));
-	});
+	}
 	//Start listening for the filter text
 	filterField.addEventListener('input', function() {
 		self.filterText(this.value.toLowerCase());
 	});
-
 	// Toggle info window for markers
 	this.toggleInfo = function(loc) {
 		google.maps.event.trigger(loc.marker, 'click');
@@ -86,7 +90,7 @@ var ViewModel = function() {
 		});
 		return;
 	});
-
+	this.drawMap();
 };
 
 ko.applyBindings(new ViewModel());
