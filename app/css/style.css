@@ -88,6 +88,11 @@ li:hover {
 .info-link {
 	color: #da6161;
 	text-decoration: none;
+	cursor: pointer;
+}
+
+.info-link:hover {
+	text-decoration: underline;
 }
 
 
@@ -151,6 +156,8 @@ li:hover {
 		font-size: 70%;
 	}
 
+}
+
 @media screen and (min-width: 800px) {
 
 	html {
@@ -164,6 +171,8 @@ li:hover {
 	#bar, #map {
 		width: 75%;
 	}
+
+}
 
 @media screen and (min-width: 1100px) {
 
@@ -181,6 +190,18 @@ li:hover {
 
 	#bar, #map {
 		width: 80%;
+	}
+
+}
+
+@media screen and (min-width: 2000px) {
+
+	#name, #list {
+		width: 15%;
+	}
+
+	#bar, #map {
+		width: 85%;
 	}
 
 }

@@ -5,10 +5,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="css/style.css">
 	<title>Map</title>
-
 </head>
 <body>
-	<!-- The Modal -->
+	<!-- Modal window -->
 	<div id="modal">
 		<div id="modal-window">
 			<span id="close">x</span>
@@ -27,11 +26,10 @@
 				<span>Filter</span>
 				<input id="filter-field" type="text" data-bind="textInput: filterText">
 			</div>
-
 		</div>
 		<div id="list">
 			<ul data-bind="foreach: allLocations">
-				<li data-bind="visible: show, text: name, event: {click: $parent.toggleInfo, mouseover: $parent.toggleBounce, mouseout: $parent.toggleBounce}"></li>
+				<li data-bind="visible: show, text: name, event: {click: $parent.toggleInfo, mouseover: $parent.bounce}"></li>
 			</ul>
 		</div>
 		<div id="map" data-bind="text: map"></div>

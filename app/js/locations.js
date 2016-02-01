@@ -9,21 +9,21 @@ var mapLocations = [
 		}
 	},
 	{
-		name: 'Tramvia Blau',
-		address: 'Av. del Tibidabo 2',
-		show: true,
-		position: {
-			lat: 41.410514,
-			lng: 2.136937
-		}
-	},
-	{
 		name: 'Forum Auditorium',
 		address: 'Plaça Leonardo da Vinci s/n',
 		show: true,
 		position: {
 			lat: 41.411060,
 			lng: 2.221094
+		}
+	},
+	{
+		name: 'Tramvia Blau',
+		address: 'Av. del Tibidabo 2',
+		show: true,
+		position: {
+			lat: 41.410514,
+			lng: 2.136937
 		}
 	},
 	{
