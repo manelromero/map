@@ -42,7 +42,7 @@ var ViewModel = function() {
 					}),
 					infoText = '<div class="map-name">' +	data.name +
 					'</div><div class="map-address">' +	data.address + '</div>' +
-					'<div><a class="info-link" name="' + marker.title + '">+info</a></div>',
+					'<div><a class="info-link">+info</a></div>',
 					infoWindow = new google.maps.InfoWindow({content: infoText});
 			// Add event listener for info windows in map markers
 			marker.addListener('click', function() {
@@ -50,7 +50,10 @@ var ViewModel = function() {
 				var check = infoWindow.anchor;
 				if (typeof check == 'undefined' || check === null) {
 					infoWindow.open(self.map, marker);
-					modalWindow(marker.title);
+					var links = document.getElementsByClassName('info-link');
+					links[links.length - 1].addEventListener('click', function() {
+						extraInfo(marker);
+					});
 					self.bounce(marker);
 					} else {
 					infoWindow.close();
@@ -63,20 +66,21 @@ var ViewModel = function() {
 	filterField.addEventListener('input', function() {
 		self.filterText(this.value.toLowerCase());
 	});
-	// Toggle info window for markers
+	// Toggle info window for list elements
 	this.toggleInfo = function(loc) {
 		google.maps.event.trigger(loc.marker, 'click');
 	};
 	// Bounce marker
 	this.bounce = function(loc) {
+		var obj;
 		if (loc.hasOwnProperty('marker')) {
-			var obj = loc.marker
+			obj = loc.marker;
 		} else {
-			var obj = loc
+			obj = loc;
 		}
 		obj.setAnimation(google.maps.Animation.BOUNCE);
 			setTimeout(function() {
-				obj.setAnimation(null)
+				obj.setAnimation(null);
 		}, 750);
 	};
 	// Filter locations

@@ -11,7 +11,7 @@ This is a map example for my [Udacity](http://www.udacity.com) **Front End Web D
 * Open the `index.html` file in the `dist` folder with your favorite browser.
 
 ## Application
-* You will see a map with some location markers
-* On the left you will see a list of this locations
-* When you hover over any element in the list, the location marker will bounce to show you where is in the map
-* You can click on any element of the list or the marker itself to get more information about the location
+* You'll see a **Google map** with some location markers.
+* On the left you'll see a list of these locations.
+* When you hover over any element in the list, the location marker will bounce to show you where is in the map.
+* You can click on any element of the list or the marker itself to get more information about the location.
