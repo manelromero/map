@@ -3,6 +3,7 @@ var Location = function(data, marker, infoWindow) {
 	this.name = ko.observable(data.name);
 	this.address = ko.observable(data.address);
 	this.show = ko.observable(data.show);
+	this.icon = ko.observable(data.icon);
 	this.position = ko.observable(data.position);
 	this.marker = marker;
 	this.infoWindow = infoWindow;
@@ -50,11 +51,19 @@ var ViewModel = function() {
 		if (!this.map) {
 			document.getElementsByClassName('map')[0].innerHTML = 'Sorry, map could not be loaded';
 		}
+
+		// Extend map
+		var locSW = new google.maps.LatLng(41.365, 2.123),
+				locNE = new google.maps.LatLng(41.414, 2.221),
+				bounds = new google.maps.LatLngBounds(locSW, locNE);
+		this.map.fitBounds(bounds);
+
 		mapLocations.forEach(function(data) {
 			// Create markers and its info windows
 			var marker = new google.maps.Marker({
 						position: data.position,
 						map: self.map,
+						icon: data.icon,
 						title: data.name
 					}),
 					infoText = '<div class="map-name">' +	data.name +
@@ -79,12 +88,6 @@ var ViewModel = function() {
 			self.allLocations.push(new Location(data, marker, infoWindow));
 		});
 	};
-
-	// Extend map
-	var locSW = new google.maps.LatLng(41.365, 2.123),
-			locNE = new google.maps.LatLng(41.414, 2.221),
-			bounds = new google.maps.LatLngBounds(locSW, locNE);
-	this.map.fitBounds(bounds);
 
 	//Start listening for the filter text
 	filterField.addEventListener('input', function() {
@@ -112,13 +115,17 @@ var ViewModel = function() {
 			nojsoncallback: 1
 		})
 		.done(function(data) {
-			$.each(data.photos.photo, function(i, item) {
-				picUrl = 'http://farm' + item.farm + '.static.flickr.com/' + item.server + '/' + item.id + '_' + item.secret + '.jpg';
-				self.flickrPictures.push({'pictureUrl': picUrl});
-			});
+			if (data.photos.photo.length > 0) {
+				$.each(data.photos.photo, function(i, item) {
+					picUrl = 'http://farm' + item.farm + '.static.flickr.com/' + item.server + '/' + item.id + '_' + item.secret + '.jpg';
+					self.flickrPictures.push({'pictureUrl': picUrl});
+				});
+			} else {
+				document.getElementsByClassName('flickr-pictures')[0].innerHTML = '<div>Sorry, Flickr images could not be loaded</div>';
+			}
 		})
 		.fail(function(error) {
-			$('#flickr-images').append('<div>Sorry, Flickr images could not be loaded</div>');
+			document.getElementsByClassName('flickr-images')[0].innerHTML = '<div>Sorry, Flickr images could not be loaded</div>';
 		});
 		// Load Wikipedia links
 		self.wikiLinks([]);
@@ -141,9 +148,6 @@ var ViewModel = function() {
 					document.getElementsByClassName('wiki-content')[0].innerHTML = 'Sorry, no links from Wikipedia for this location';
 				}
 			}
-		})
-		.fail(function(error) {
-			$('#wiki-content').append('Sorry, links from Wikipedia could not be loaded');
 		});
 	};
 
@@ -186,4 +190,6 @@ var ViewModel = function() {
 
 };
 
-ko.applyBindings(new ViewModel());
+function startModel() {
+	ko.applyBindings(new ViewModel());
+}

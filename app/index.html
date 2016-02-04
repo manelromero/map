@@ -13,7 +13,7 @@
 			<span class="close">x</span>
 			<h2>Flickr pictures</h2>
 			<div class="flickr-pictures" data-bind="foreach: flickrPictures">
-				<img class="flickr-images" data-bind="attr: {src: pictureUrl}" />
+				<img class="flickr-images" data-bind="attr: {src: pictureUrl}" alt="Flickr picture" />
 			</div>
 			<h2>Wikipedia links</h2>
 			<ul class="wiki-content" data-bind="foreach: wikiLinks">
@@ -40,11 +40,10 @@
 		<div class="map" data-bind="text: map"></div>
 	</div>
 	<!-- Scripts -->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDdTNrsUmxUIcYUxbfzsLDAtVuk_oUrOaE"></script>
+	<script async src="https://maps.googleapis.com/maps/api/js?callback=startModel&key=AIzaSyDdTNrsUmxUIcYUxbfzsLDAtVuk_oUrOaE"></script>
 	<script src="js/lib/knockout-3.4.0.js"></script>
 	<script src="js/lib/jquery.js"></script>
 	<script src="js/locations.js"></script>
 	<script src="js/app.js"></script>
-	<!-- <script src="js/extrainfo.js"></script> -->
 </body>
 </html>
