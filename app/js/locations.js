@@ -1,4 +1,4 @@
-var mapLocations = [
+var locations = [
 	{
 		name: 'Park Güell',
 		address: 'Carrer d\'Olot s/n',
