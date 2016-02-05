@@ -1,6 +1,8 @@
+'use strict';
 // Map bounds
 var LOC_SW = [41.365, 2.123];
 var LOC_NE = [41.414, 2.221];
+var vm;
 
 // Model
 var Location = function(data, marker, infoWindow) {
@@ -49,6 +51,12 @@ Location.prototype.extraInfo = function() {
 	// Load Flickr pictures
 	var flickrUrl = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=dc610307d5d7e99c3a682062435787d5',
 			picUrl;
+	// Error handling
+	var flickrRequestTimeout = setTimeout(function() {
+		console.log('jander');
+		vm.flickrError('Sorry, Flickr images could not be loaded');
+	}, 8000);
+	// JSON request
 	$.getJSON(flickrUrl, {
 		text: this.name,
 		per_page: 5,
@@ -62,23 +70,32 @@ Location.prototype.extraInfo = function() {
 				vm.flickrPictures.push({'pictureUrl': picUrl});
 			});
 		} else {
-			document.getElementsByClassName('flickr-pictures')[0].innerHTML = '<div>Sorry, Flickr images could not be loaded</div>';
+			vm.flickrError('Sorry, Flickr images could not be loaded');
 		}
+		clearTimeout(flickrRequestTimeout);
 	})
 	.fail(function(error) {
-		document.getElementsByClassName('flickr-images')[0].innerHTML = '<div>Sorry, Flickr images could not be loaded</div>';
+		vm.flickrError('Sorry, Flickr images could not be loaded');
 	});
 	// Load Wikipedia links
 	this.infoWindow.close();
+	vm.flickrError(''); // Empty <span> error
+	vm.wikiError(''); // Empty <span> error
+	// Error handling
+	var wikiRequestTimeout = setTimeout(function() {
+		vm.wikiError('Sorry, Wikipedia links could not be loaded');
+	}, 8000);
+	// Ajax request
 	$.ajax({
 		url: 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + this.name(),
 		dataType: 'jsonp',
 		headers: { 'Api-User-Agent': 'Example/1.0' }
 	})
 	.done(function(data) {
-		var articles = data[1];
-		if (articles.length > 0) {
-			for (var i = 0; i < articles.length; i++) {
+		var articles = data[1],
+				articlesLength = articles.length;
+		if (articlesLength > 0) {
+			for (var i = 0; i < articlesLength; i++) {
 				var articleText = articles[i],
 						wikiLink = 'http://en.wikipedia.org/wiki/' + articleText;
 				vm.wikiLinks.push({
@@ -87,11 +104,12 @@ Location.prototype.extraInfo = function() {
 				});
 			}
 		} else {
-			document.getElementsByClassName('wiki-content')[0].innerHTML = 'Sorry, no links from Wikipedia for this location';
+			vm.wikiError('Sorry, no links from Wikipedia for this location');
 		}
+		clearTimeout(wikiRequestTimeout);
 	})
 	.fail(function(error) {
-		document.getElementsByClassName('wiki-content')[0].innerHTML = 'Sorry, Wikipedia links could not be loaded';
+		vm.wikiError('Sorry, Wikipedia links could not be loaded');
 	});
 };
 
@@ -105,6 +123,8 @@ var ViewModel = function() {
 
 	self.flickrPictures = ko.observableArray([]);
 	self.wikiLinks = ko.observableArray([]);
+	self.flickrError = ko.observable();
+	self.wikiError = ko.observable();
 	self.filterText = ko.observable();
 	self.allLocations = ko.observableArray([]);
 	self.map = new google.maps.Map(document.getElementsByClassName('map')[0]);

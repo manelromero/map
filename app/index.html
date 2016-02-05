@@ -12,10 +12,12 @@
 		<div class="modal-window">
 			<span class="close">x</span>
 			<h2>Flickr pictures</h2>
+			<span data-bind="text: flickrError"></span>
 			<div class="flickr-pictures" data-bind="foreach: flickrPictures">
 				<img class="flickr-images" data-bind="attr: {src: pictureUrl}" alt="Flickr picture" />
 			</div>
 			<h2>Wikipedia links</h2>
+			<span data-bind="text: wikiError"></span>
 			<ul class="wiki-content" data-bind="foreach: wikiLinks">
 				<li class='wiki-link'>
 					<a data-bind="text: linkName, attr: {href: wikiLink}" target="_blank"></a>
@@ -40,7 +42,7 @@
 		<div class="map" data-bind="text: map"></div>
 	</div>
 	<!-- Scripts -->
-	<script async src="https://maps.googleapis.com/maps/api/js?callback=startModel&key=AIzaSyDdTNrsUmxUIcYUxbfzsLDAtVuk_oUrOaE" onerror="googleMapsError()"></script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?callback=startModel&key=AIzaSyDdTNrsUmxUIcYUxbfzsLDAtVuk_oUrOaE" onerror="googleMapsError()"></script>
 	<script src="js/lib/knockout-3.4.0.js"></script>
 	<script src="js/lib/jquery.js"></script>
 	<script src="js/locations.js"></script>
