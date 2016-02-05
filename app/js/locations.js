@@ -2,7 +2,6 @@ var locations = [
 	{
 		name: 'Park Güell',
 		address: 'Carrer d\'Olot s/n',
-		show: true,
 		icon: '',
 		position: {
 			lat: 41.414,
@@ -12,7 +11,6 @@ var locations = [
 	{
 		name: 'Forum Auditorium',
 		address: 'Plaça Leonardo da Vinci s/n',
-		show: true,
 		icon: '',
 		position: {
 			lat: 41.411060,
@@ -22,7 +20,6 @@ var locations = [
 	{
 		name: 'Tramvia Blau',
 		address: 'Av. del Tibidabo 2',
-		show: true,
 		icon: '',
 		position: {
 			lat: 41.410514,
@@ -32,7 +29,6 @@ var locations = [
 	{
 		name: 'La Sagrada Familia',
 		address: 'Marina 253',
-		show: true,
 		icon: '',
 		position: {
 			lat: 41.403563,
@@ -42,7 +38,6 @@ var locations = [
 	{
 		name: 'Casa Milà',
 		address: 'Provença 261-265',
-		show: true,
 		icon: '',
 		position: {
 			lat: 41.3953,
@@ -52,7 +47,6 @@ var locations = [
 	{
 		name: 'Restaurant Daps',
 		address: 'Av. Diagonal 469',
-		show: true,
 		icon: 'http://maps.google.com/mapfiles/kml/pal2/icon40.png',
 		position: {
 			lat: 41.393018,
@@ -62,7 +56,6 @@ var locations = [
 	{
 		name: 'Restaurant La Polpa',
 		address: 'Enric Granados 69',
-		show: true,
 		icon: 'http://maps.google.com/mapfiles/kml/pal2/icon40.png',
 		position: {
 			lat: 41.391262,
@@ -72,7 +65,6 @@ var locations = [
 	{
 		name: 'Ciutadella Park',
 		address: 'Passeig de Picasso 21',
-		show: true,
 		icon: '',
 		position: {
 			lat: 41.387891,
@@ -82,7 +74,6 @@ var locations = [
 	{
 		name: 'Plaça Catalunya',
 		address: 'Plaça Catalunya 1',
-		show: true,
 		icon: '',
 		position: {
 			lat: 41.386967,
@@ -92,7 +83,6 @@ var locations = [
 	{
 		name: 'Olympic Port',
 		address: 'Marina 42',
-		show: true,
 		icon: '',
 		position: {
 			lat: 41.386425,
@@ -102,7 +92,6 @@ var locations = [
 	{
 		name: 'Picasso Museum',
 		address: 'Montcada 15-23',
-		show: true,
 		icon: '',
 		position: {
 			lat: 41.385217,
@@ -112,7 +101,6 @@ var locations = [
 	{
 		name: 'Barcelona Biomedical Research Park',
 		address: 'Doctor Aiguader 88',
-		show: true,
 		icon: '',
 		position: {
 			lat: 41.385189,
@@ -122,7 +110,6 @@ var locations = [
 	{
 		name: 'Restaurant El Agua',
 		address: 'Pg. Marítim de la Barceloneta 30',
-		show: true,
 		icon: 'http://maps.google.com/mapfiles/kml/pal2/icon40.png',
 		position: {
 			lat: 41.384900,
@@ -132,7 +119,6 @@ var locations = [
 	{
 		name: 'Barcelona Cathedral',
 		address: 'Pla de La Seu s/n',
-		show: true,
 		icon: '',
 		position: {
 			lat: 41.384,
@@ -142,7 +128,6 @@ var locations = [
 	{
 		name: 'MACBA',
 		address: 'Plaça dels Àngels 1',
-		show: true,
 		icon: '',
 		position: {
 			lat: 41.383027,
@@ -152,7 +137,6 @@ var locations = [
 	{
 		name: 'Restaurant l\'Altre Caliu',
 		address: 'Lluçà 11',
-		show: true,
 		icon: 'http://maps.google.com/mapfiles/kml/pal2/icon40.png',
 		position: {
 			lat: 41.381433,
@@ -162,7 +146,6 @@ var locations = [
 	{
 		name: 'Camp Nou',
 		address: 'Arístides Maillol 12',
-		show: true,
 		icon: '',
 		position: {
 			lat: 41.380897,
@@ -172,7 +155,6 @@ var locations = [
 	{
 		name: 'Restaurant Da Paolo',
 		address: 'Av. Madrid 63',
-		show: true,
 		icon: 'http://maps.google.com/mapfiles/kml/pal2/icon40.png',
 		position: {
 			lat: 41.378179,
@@ -182,7 +164,6 @@ var locations = [
 	{
 		name: 'Font Màgica de Montjuïc',
 		address: 'Plaça de Carles Buïgas 1',
-		show: true,
 		icon: '',
 		position: {
 			lat: 41.371144,
@@ -192,7 +173,6 @@ var locations = [
 	{
 		name: 'Montjuic Olympic Stadium',
 		address: 'Carrer de l\'Estadi 50',
-		show: true,
 		icon: '',
 		position: {
 			lat: 41.364754,

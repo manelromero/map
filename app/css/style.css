@@ -153,6 +153,12 @@ li:hover {
 	list-style: none;
 }
 
+.google-error {
+	padding: 10%;
+	color: #da6161;
+	font: bold 2rem sans-serif;
+}
+
 @media screen and (min-width: 600px) {
 
 	html {
