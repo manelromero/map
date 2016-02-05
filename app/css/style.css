@@ -205,6 +205,10 @@ li:hover {
 		width: 80%;
 	}
 
+	.modal-window {
+		width: 75%;
+	}
+
 }
 
 @media screen and (min-width: 2000px) {
@@ -217,6 +221,10 @@ li:hover {
 	.bar,
 	.map {
 		width: 85%;
+	}
+
+	.modal-window {
+		width: 50%;
 	}
 
 }

@@ -30,7 +30,13 @@ Location.prototype.bounce = function() {
 
 // Extra info
 Location.prototype.extraInfo = function() {
-	modalWindow = document.getElementsByClassName('modal')[0];
+	var modalWindow = document.getElementsByClassName('modal')[0];
+	// Close modal window when click outside it
+	window.onclick = function(event) {
+		if (event.target == modal) {
+			modalWindow.style.display = 'none';
+		}
+	};
 	// Delete modal window content
 	document.getElementsByClassName('flickr-pictures')[0].innerHTML = '';
 	document.getElementsByClassName('wiki-content')[0].innerHTML = '';
@@ -53,7 +59,7 @@ Location.prototype.extraInfo = function() {
 		if (data.photos.photo.length > 0) {
 			$.each(data.photos.photo, function(i, item) {
 				picUrl = 'http://farm' + item.farm + '.static.flickr.com/' + item.server + '/' + item.id + '_' + item.secret + '.jpg';
-				flickrPictures.push({'pictureUrl': picUrl});
+				vm.flickrPictures.push({'pictureUrl': picUrl});
 			});
 		} else {
 			document.getElementsByClassName('flickr-pictures')[0].innerHTML = '<div>Sorry, Flickr images could not be loaded</div>';
@@ -63,26 +69,29 @@ Location.prototype.extraInfo = function() {
 		document.getElementsByClassName('flickr-images')[0].innerHTML = '<div>Sorry, Flickr images could not be loaded</div>';
 	});
 	// Load Wikipedia links
-	//wikiLinks().length = 0;
+	this.infoWindow.close();
 	$.ajax({
 		url: 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + this.name(),
 		dataType: 'jsonp',
-		headers: { 'Api-User-Agent': 'Example/1.0' },
-		success: function(data) {
-			var articles = data[1];
-			if (articles.length > 0) {
-				for (var i = 0; i < articles.length; i++) {
-					var articleText = articles[i],
-							wikiLink = 'http://en.wikipedia.org/wiki/' + articleText;
-					wikiLinks.push({
-						'linkName': articleText,
-						'wikiLink': wikiLink,
-					});
-				}
-			} else {
-				document.getElementsByClassName('wiki-content')[0].innerHTML = 'Sorry, no links from Wikipedia for this location';
+		headers: { 'Api-User-Agent': 'Example/1.0' }
+	})
+	.done(function(data) {
+		var articles = data[1];
+		if (articles.length > 0) {
+			for (var i = 0; i < articles.length; i++) {
+				var articleText = articles[i],
+						wikiLink = 'http://en.wikipedia.org/wiki/' + articleText;
+				vm.wikiLinks.push({
+					'linkName': articleText,
+					'wikiLink': wikiLink
+				});
 			}
+		} else {
+			document.getElementsByClassName('wiki-content')[0].innerHTML = 'Sorry, no links from Wikipedia for this location';
 		}
+	})
+	.fail(function(error) {
+		document.getElementsByClassName('wiki-content')[0].innerHTML = 'Sorry, Wikipedia links could not be loaded';
 	});
 };
 
@@ -94,9 +103,9 @@ var ViewModel = function() {
 			filterField = document.getElementsByClassName('filter-field')[0],
 			mapLocations = [];
 
+	self.flickrPictures = ko.observableArray([]);
+	self.wikiLinks = ko.observableArray([]);
 	self.filterText = ko.observable();
-	flickrPictures = ko.observableArray([]);
-	wikiLinks = ko.observableArray([]);
 	self.allLocations = ko.observableArray([]);
 	self.map = new google.maps.Map(document.getElementsByClassName('map')[0]);
 
@@ -112,13 +121,6 @@ var ViewModel = function() {
 	// Change map size if browser is resized
 	window.onresize = function() {
 		elemHeight();
-	};
-
-	// Close modal window when click outside it
-	window.onclick = function(event) {
-		if (event.target == modal) {
-			modalWindow.style.display = 'none';
-		}
 	};
 
 	// Create locations and place them in the map
@@ -158,9 +160,12 @@ var ViewModel = function() {
 				}
 				// Open info window
 				infoWindow.open(self.map, marker);
-				document.getElementsByClassName('info-link')[0].addEventListener('click', function() {
+				var link = document.getElementsByClassName('info-link')[0];
+				var listener = function() {
 					self.allLocations()[data.id].extraInfo();
-				});
+					link.removeEventListener('click', listener, false);
+				};
+				link.addEventListener('click', listener, false);
 				self.allLocations()[data.id].bounce();
 			});
 		});
@@ -197,7 +202,8 @@ var ViewModel = function() {
 };
 
 function startModel() {
-	ko.applyBindings(new ViewModel());
+	vm = new ViewModel();
+	ko.applyBindings(vm);
 }
 
 function googleMapsError() {
